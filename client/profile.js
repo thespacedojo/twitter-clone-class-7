@@ -6,6 +6,11 @@ Template.profile.helpers({
 
 Template.profile.events({
   'click .follow': function(e, t) {
+    e.preventDefault();
     Meteor.call('follow', t.data.user._id);
+  },
+  'click .unfollow': function(e, t) {
+    e.preventDefault();
+    Meteor.call('unfollow', t.data.user._id);
   }
 });
