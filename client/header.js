@@ -1,5 +1,6 @@
 Template.header.helpers({
   username: function() {
-    return Meteor.user().username;
+    if (Meteor.user())
+      return Meteor.user().username;
   }
 });

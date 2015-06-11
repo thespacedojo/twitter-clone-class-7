@@ -1,10 +1,4 @@
 Template.tweetStream.helpers({
-  tweets: function() {
-    return Tweets.find();
-  },
-  tweetedTime: function() {
-    return moment(this.tweetedAt).fromNow();
-  }
 });
 
 Template.tweetStream.events({
