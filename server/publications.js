@@ -1,5 +1,13 @@
-Meteor.publish('tweets', function() {
-  return Tweets.find({});
+Meteor.publish('myTweets', function() {
+  userCursor = Users.find({_id: this.userId});
+  user = userCursor.fetch()[0];
+  followingIds = [];
+  followingIds.push(user.profile.followingIds);
+  followingIds.push(user._id);
+  followingIds = _(followingIds).flatten();
+  users = Users.find({_id: {$in: followingIds}}, {fields: {emails: 0, services: 0}});
+  tweets = Tweets.find({userId: {$in: followingIds}});
+  return [users, tweets];
 });
 
 Meteor.publish('profile', function(username) {
