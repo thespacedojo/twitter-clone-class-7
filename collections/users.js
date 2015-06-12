@@ -8,7 +8,8 @@ UserSchema = new SimpleSchema({
   },
   "profile.description": {
     type: String,
-    label: "Description"
+    label: "Description",
+    optional: true
   },
   "profile.location": {
     type: String,
