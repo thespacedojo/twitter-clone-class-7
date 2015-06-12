@@ -13,7 +13,8 @@ UserSchema = new SimpleSchema({
   },
   "profile.location": {
     type: String,
-    label: "Location"
+    label: "Location",
+    optional: true
   },
   "profile.image": {
     type: String,
