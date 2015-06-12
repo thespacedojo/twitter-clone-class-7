@@ -1,6 +1,45 @@
 Users = Meteor.users;
 
-Users.helpers();
+UserSchema = new SimpleSchema({
+  username: {
+    type: String,
+    label: "Username",
+    max: 200
+  },
+  "profile.description": {
+    type: String,
+    label: "Description"
+  },
+  "profile.location": {
+    type: String,
+    label: "Location"
+  },
+  "profile.image": {
+    type: String,
+    autoform: {
+      afFieldInput: {
+        type: 'fileUpload',
+        collection: 'Images'
+      }
+    },
+    label: 'Choose file',
+    optional: true
+  }
+});
+
+Users.attachSchema(UserSchema);
+
+Users.helpers({
+  profileImage: function() {
+    return "/cfs/files/images/" + this.profile.image;
+  }
+});
+
+Users.allow({
+  update: function(userId, doc, fieldNames, modifier) {
+    return userId === doc._id;
+  }
+});
 
 Meteor.methods({
   follow: function(followId) {

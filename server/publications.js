@@ -87,3 +87,7 @@ Meteor.publish('usernames', function(selector, options, colName) {
   self.ready();
   self.onStop(function() {usersCursor.stop();});
 });
+
+Meteor.publish('images', function() {
+  return Images.find();
+});
